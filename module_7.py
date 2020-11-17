@@ -315,9 +315,9 @@ def exec_waypoint_nav_demo(args):
         # player start information
         player_start = PLAYER_START_INDEX
 
-        client.start_episode(player_start)
+        #client.start_episode(player_start)
 
-        time.sleep(CLIENT_WAIT_TIME);
+        #time.sleep(CLIENT_WAIT_TIME);
 
         # Notify the server that we want to start the episode at the
         # player_start index. This function blocks until the server is ready
@@ -723,7 +723,8 @@ def exec_waypoint_nav_demo(args):
                 # TODO: Uncomment each code block between the dashed lines to run the planner.
                 # --------------------------------------------------------------
                 #  # Compute open loop speed estimate.
-                #  open_loop_speed = lp._velocity_planner.get_open_loop_speed(current_timestamp - prev_timestamp)
+                open_loop_speed = lp._velocity_planner.get_open_loop_speed(current_timestamp - prev_timestamp)
+                print(open_loop_speed)
 
                 #  # Calculate the goal state set in the local frame for the local planner.
                 #  # Current speed should be open loop for the velocity profile generation.
