@@ -23,8 +23,8 @@ class VelocityPlanner:
     # Input: timestep is in seconds
     def get_open_loop_speed(self, timestep):
         if len(self._prev_trajectory) == 1:
-            return self._prev_trajectory[0][2] 
-        
+            return self._prev_trajectory[0][2]
+
         # If simulation time step is zero, give the start of the trajectory as the
         # open loop estimate.
         if timestep < 1e-4:

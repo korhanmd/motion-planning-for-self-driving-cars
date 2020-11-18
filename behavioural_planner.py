@@ -435,8 +435,11 @@ def get_closest_index(waypoints, ego_state):
     closest_index = 0
     # TODO: INSERT YOUR CODE BETWEEN THE DASHED LINES
     # ------------------------------------------------------------------
-    # for i in range(len(waypoints)):
-    #   ...
+    for i in range(len(waypoints)):
+        current_len = np.linalg.norm(ego_state[:2] - waypoints[i][:2])
+        if current_len < closest_len:
+            closest_index = i
+            closest_len = current_len
     # ------------------------------------------------------------------
 
     return closest_len, closest_index

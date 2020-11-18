@@ -724,17 +724,17 @@ def exec_waypoint_nav_demo(args):
                 # --------------------------------------------------------------
                 #  # Compute open loop speed estimate.
                 open_loop_speed = lp._velocity_planner.get_open_loop_speed(current_timestamp - prev_timestamp)
-                print(open_loop_speed)
+                #print("Current: %s, previous: %s" % (current_timestamp, prev_timestamp))
 
                 #  # Calculate the goal state set in the local frame for the local planner.
                 #  # Current speed should be open loop for the velocity profile generation.
-                #  ego_state = [current_x, current_y, current_yaw, open_loop_speed]
+                ego_state = [current_x, current_y, current_yaw, open_loop_speed]
 
                 #  # Set lookahead based on current speed.
-                #  bp.set_lookahead(BP_LOOKAHEAD_BASE + BP_LOOKAHEAD_TIME * open_loop_speed)
+                bp.set_lookahead(BP_LOOKAHEAD_BASE + BP_LOOKAHEAD_TIME * open_loop_speed)
 
                 #  # Perform a state transition in the behavioural planner.
-                #  bp.transition_state(waypoints, ego_state, current_speed)
+                bp.transition_state(waypoints, ego_state, current_speed)
 
                 #  # Check to see if we need to follow the lead vehicle.
                 #  bp.check_for_lead_vehicle(ego_state, lead_car_pos[1])
