@@ -104,7 +104,7 @@ class BehaviouralPlanner:
             # along the waypoints.
             # TODO: INSERT YOUR CODE BETWEEN THE DASHED LINES
             # ------------------------------------------------------------------
-            # goal_index = ...
+            goal_index = self.get_goal_index(waypoints, ego_state, closest_len, closest_index)
             # ------------------------------------------------------------------
 
             # Finally, check the index set between closest_index and goal_index
@@ -248,11 +248,12 @@ class BehaviouralPlanner:
         # Otherwise, find our next waypoint.
         # TODO: INSERT YOUR CODE BETWEEN THE DASHED LINES
         # ------------------------------------------------------------------
-        # while wp_index < len(waypoints) - 1:
-        #   arc_length += ...
+        while wp_index < len(waypoints) - 1:
+            arc_length += np.linalg.norm(np.array(waypoints[wp_index][:2]) - np.array(waypoints[wp_index+1][:2]))
+            wp_index += 1
+            if arc_length > self._lookahead:
+                return wp_index
         # ------------------------------------------------------------------
-
-        return wp_index
 
     # Checks the given segment of the waypoint list to see if it
     # intersects with a stop line. If any index does, return the
