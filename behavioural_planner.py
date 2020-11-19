@@ -97,7 +97,7 @@ class BehaviouralPlanner:
             # First, find the closest index to the ego vehicle.
             # TODO: INSERT YOUR CODE BETWEEN THE DASHED LINES
             # ------------------------------------------------------------------
-            # closest_len, closest_index = ...
+            closest_len, closest_index = get_closest_index(waypoints, ego_state)
             # ------------------------------------------------------------------
 
             # Next, find the goal index that lies within the lookahead distance
@@ -436,7 +436,7 @@ def get_closest_index(waypoints, ego_state):
     # TODO: INSERT YOUR CODE BETWEEN THE DASHED LINES
     # ------------------------------------------------------------------
     for i in range(len(waypoints)):
-        current_len = np.linalg.norm(ego_state[:2] - waypoints[i][:2])
+        current_len = np.linalg.norm(np.array(ego_state[:2]) - np.array(waypoints[i][:2]))
         if current_len < closest_len:
             closest_index = i
             closest_len = current_len
