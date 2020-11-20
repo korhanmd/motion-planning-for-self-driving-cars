@@ -136,8 +136,6 @@ class BehaviouralPlanner:
                 self._state = STAY_STOPPED
             # ------------------------------------------------------------------
 
-            pass
-
         # In this state, check to see if we have stayed stopped for at
         # least STOP_COUNTS number of cycles. If so, we can now leave
         # the stop sign and transition to the next state.
@@ -150,8 +148,8 @@ class BehaviouralPlanner:
             if self._stop_count == STOP_COUNTS:
                 # TODO: INSERT YOUR CODE BETWEEN THE DASHED LINES
                 # --------------------------------------------------------------
-                # closest_len, closest_index = ...
-                # goal_index = ...
+                closest_len, closest_index = get_closest_index(waypoints, ego_state)
+                goal_index = self.get_goal_index(waypoints, ego_state, closest_len, closest_index)
                 # --------------------------------------------------------------
 
                 # We've stopped for the required amount of time, so the new goal 
@@ -159,29 +157,27 @@ class BehaviouralPlanner:
                 # that is the lookahead distance away.
                 # TODO: INSERT YOUR CODE BETWEEN THE DASHED LINES
                 # --------------------------------------------------------------
-                # stop_sign_found = ...
-                # self._goal_index = ... 
-                # self._goal_state = ... 
+                stop_sign_found = False
+                self._goal_index = goal_index
+                self._goal_state = waypoints[self._goal_index]
                 # --------------------------------------------------------------
 
                 # If the stop sign is no longer along our path, we can now
                 # transition back to our lane following state.
                 # TODO: INSERT YOUR CODE BETWEEN THE DASHED LINES
                 # --------------------------------------------------------------
-                # if not stop_sign_found:
-                #   ...
+                if not stop_sign_found:
+                    self._stop_count = 0
+                    self._state = FOLLOW_LANE
                 # --------------------------------------------------------------
-
-                pass
 
             # Otherwise, continue counting.
             else:
                 # TODO: INSERT YOUR CODE BETWEEN THE DASHED LINES
                 # --------------------------------------------------------------
-                # ...
+                self._stop_count += 1
                 # --------------------------------------------------------------
 
-                pass
         else:
             raise ValueError('Invalid state value.')
 
