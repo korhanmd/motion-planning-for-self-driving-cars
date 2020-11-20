@@ -111,7 +111,7 @@ class BehaviouralPlanner:
             # for stop signs, and compute the goal state accordingly.
             # TODO: INSERT YOUR CODE BETWEEN THE DASHED LINES
             # ------------------------------------------------------------------
-            goal_index, stop_sign_found = get_goal_index(waypoints, ego_state, closest_len, closest_index)
+            goal_index, stop_sign_found = self.check_for_stop_signs(waypoints, closest_index, goal_index)
             self._goal_index = goal_index
             self._goal_state = waypoints[self._goal_index]
             # ------------------------------------------------------------------
