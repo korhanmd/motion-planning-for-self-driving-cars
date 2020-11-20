@@ -132,7 +132,8 @@ class BehaviouralPlanner:
         elif self._state == DECELERATE_TO_STOP:
             # TODO: INSERT YOUR CODE BETWEEN THE DASHED LINES
             # ------------------------------------------------------------------
-            # ...
+            if closed_loop_speed < STOP_THRESHOLD:
+                self._state = STAY_STOPPED
             # ------------------------------------------------------------------
 
             pass
