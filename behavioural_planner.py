@@ -111,20 +111,19 @@ class BehaviouralPlanner:
             # for stop signs, and compute the goal state accordingly.
             # TODO: INSERT YOUR CODE BETWEEN THE DASHED LINES
             # ------------------------------------------------------------------
-            # goal_index, stop_sign_found = ...
-            # self._goal_index = ...
-            # self._goal_state = ...
+            goal_index, stop_sign_found = get_goal_index(waypoints, ego_state, closest_len, closest_index)
+            self._goal_index = goal_index
+            self._goal_state = waypoints[self._goal_index]
             # ------------------------------------------------------------------
 
             # If stop sign found, set the goal to zero speed, then transition to 
             # the deceleration state.
             # TODO: INSERT YOUR CODE BETWEEN THE DASHED LINES
             # ------------------------------------------------------------------
-            # if stop_sign_found:
-            #   ...
+            if stop_sign_found:
+                self._goal_state[2] = 0.0
+                self._state = DECELERATE_TO_STOP
             # ------------------------------------------------------------------
-
-            pass
 
         # In this state, check if we have reached a complete stop. Use the
         # closed loop speed to do so, to ensure we are actually at a complete
