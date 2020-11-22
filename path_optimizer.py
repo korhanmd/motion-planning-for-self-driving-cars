@@ -110,14 +110,13 @@ class PathOptimizer:
     #         c - the third term of kappa(s).
     #         d - the fourth term of kappa(s).
     def thetaf(self, a, b, c, d, s):
-        pass
 
         # TODO: INSERT YOUR CODE BETWEEN THE DASHED LINES
         # ------------------------------------------------------------------
         # # Remember that a, b, c, d and s are lists
-        # ...
-        # thetas = ...
-        # return thetas
+        s = np.array(s)
+        thetas = np.array(a)*s + np.array(b)/2*s**2 + np.array(c)/3*s**3 + np.array(d)/4*s**4
+        return thetas
         # ------------------------------------------------------------------
 
     ######################################################
