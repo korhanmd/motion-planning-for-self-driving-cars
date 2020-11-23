@@ -746,7 +746,7 @@ def exec_waypoint_nav_demo(args):
                 paths, path_validity = lp.plan_paths(goal_state_set)
 
                 #  # Transform those paths back to the global frame.
-                #  paths = local_planner.transform_paths(paths, ego_state)
+                paths = local_planner.transform_paths(paths, ego_state)
 
                 #  # Perform collision checking.
                 #  collision_check_array = lp._collision_checker.collision_check(paths, [parkedcar_box_pts])
