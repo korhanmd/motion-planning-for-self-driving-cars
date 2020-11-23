@@ -74,7 +74,7 @@ class PathOptimizer:
         # has a lower limit of the straight line arc length.
         # TODO: INSERT YOUR CODE BETWEEN THE DASHED LINES
         # ------------------------------------------------------------------
-        # bounds = ...
+        bounds = [[-0.5, 0.5], [-0.5, 0.5], [sf_0, None]]
         # ------------------------------------------------------------------
 
         # Here we will call scipy.optimize.minimize to optimize our spiral.
@@ -84,11 +84,10 @@ class PathOptimizer:
         # optimization methods.
         # TODO: INSERT YOUR CODE BETWEEN THE DASHED LINES
         # ------------------------------------------------------------------
-        # res = scipy.optimize.minimize(...)
+        res = scipy.optimize.minimize(fun=self.objective, x0=p0, method='L-BFGS-B', jac=self.objective_grad, bounds=bounds)
         # ------------------------------------------------------------------
 
         spiral = self.sample_spiral(res.x)
-        print(spiral)
         return spiral
 
     ######################################################

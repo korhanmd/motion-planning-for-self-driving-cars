@@ -743,7 +743,7 @@ def exec_waypoint_nav_demo(args):
                 goal_state_set = lp.get_goal_state_set(bp._goal_index, bp._goal_state, waypoints, ego_state)
 
                 #  # Calculate planned paths in the local frame.
-                #  paths, path_validity = lp.plan_paths(goal_state_set)
+                paths, path_validity = lp.plan_paths(goal_state_set)
 
                 #  # Transform those paths back to the global frame.
                 #  paths = local_planner.transform_paths(paths, ego_state)
