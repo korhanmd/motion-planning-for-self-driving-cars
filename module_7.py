@@ -749,7 +749,7 @@ def exec_waypoint_nav_demo(args):
                 paths = local_planner.transform_paths(paths, ego_state)
 
                 #  # Perform collision checking.
-                #  collision_check_array = lp._collision_checker.collision_check(paths, [parkedcar_box_pts])
+                collision_check_array = lp._collision_checker.collision_check(paths, [parkedcar_box_pts])
 
                 #  # Compute the best local path.
                 #  best_index = lp._collision_checker.select_best_path_index(paths, collision_check_array, bp._goal_state)
