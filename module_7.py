@@ -724,7 +724,6 @@ def exec_waypoint_nav_demo(args):
                 # --------------------------------------------------------------
                 #  # Compute open loop speed estimate.
                 open_loop_speed = lp._velocity_planner.get_open_loop_speed(current_timestamp - prev_timestamp)
-                #print("Current: %s, previous: %s" % (current_timestamp, prev_timestamp))
 
                 #  # Calculate the goal state set in the local frame for the local planner.
                 #  # Current speed should be open loop for the velocity profile generation.
@@ -754,19 +753,19 @@ def exec_waypoint_nav_demo(args):
                 #  # Compute the best local path.
                 best_index = lp._collision_checker.select_best_path_index(paths, collision_check_array, bp._goal_state)
                 #  # If no path was feasible, continue to follow the previous best path.
-                #  if best_index == None:
-                #      best_path = lp._prev_best_path
-                #  else:
-                #      best_path = paths[best_index]
-                #      lp._prev_best_path = best_path
+                if best_index == None:
+                    best_path = lp._prev_best_path
+                else:
+                    best_path = paths[best_index]
+                    lp._prev_best_path = best_path
 
                 #  # Compute the velocity profile for the path, and compute the waypoints.
                 #  # Use the lead vehicle to inform the velocity profile's dynamic obstacle handling.
                 #  # In this scenario, the only dynamic obstacle is the lead vehicle at index 1.
-                #  desired_speed = bp._goal_state[2]
-                #  lead_car_state = [lead_car_pos[1][0], lead_car_pos[1][1], lead_car_speed[1]]
-                #  decelerate_to_stop = bp._state == behavioural_planner.DECELERATE_TO_STOP
-                #  local_waypoints = lp._velocity_planner.compute_velocity_profile(best_path, desired_speed, ego_state, current_speed, decelerate_to_stop, lead_car_state, bp._follow_lead_vehicle)
+                desired_speed = bp._goal_state[2]
+                lead_car_state = [lead_car_pos[1][0], lead_car_pos[1][1], lead_car_speed[1]]
+                decelerate_to_stop = bp._state == behavioural_planner.DECELERATE_TO_STOP
+                local_waypoints = lp._velocity_planner.compute_velocity_profile(best_path, desired_speed, ego_state, current_speed, decelerate_to_stop, lead_car_state, bp._follow_lead_vehicle)
                 # --------------------------------------------------------------
 
                 if local_waypoints != None:
