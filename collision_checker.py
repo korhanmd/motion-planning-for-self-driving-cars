@@ -164,7 +164,9 @@ class CollisionChecker:
                 # A lower score implies a more suitable path.
                 # TODO: INSERT YOUR CODE BETWEEN THE DASHED LINES
                 # --------------------------------------------------------------
-                # score = ...
+
+                score = np.linalg.norm(np.array(paths[i][:2]).T[-1] - np.array(goal_state[:2]))
+
                 # --------------------------------------------------------------
 
                 # Compute the "proximity to other colliding paths" score and
@@ -177,10 +179,8 @@ class CollisionChecker:
                         if not collision_check_array[j]:
                             # TODO: INSERT YOUR CODE BETWEEN THE DASHED LINES
                             # --------------------------------------------------
-                            # score += self._weight * ...
+                            score += self._weight / np.absolute(i - j)
                             # --------------------------------------------------
-
-                            pass
 
             # Handle the case of colliding paths.
             else:
