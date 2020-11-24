@@ -29,6 +29,7 @@ class BehaviouralPlanner:
         self._goal_state                    = [0.0, 0.0, 0.0]
         self._goal_index                    = 0
         self._stop_count                    = 0
+        self._continue_count                = 0
 
     def set_lookahead(self, lookahead):
         self._lookahead = lookahead
@@ -111,7 +112,9 @@ class BehaviouralPlanner:
             # for stop signs, and compute the goal state accordingly.
             # TODO: INSERT YOUR CODE BETWEEN THE DASHED LINES
             # ------------------------------------------------------------------
-            goal_index, stop_sign_found = self.check_for_stop_signs(waypoints, closest_index, goal_index)
+            if self._continue_count > 60:
+                goal_index, stop_sign_found = self.check_for_stop_signs(waypoints, closest_index, goal_index)
+            
             self._goal_index = goal_index
             self._goal_state = waypoints[self._goal_index]
             # ------------------------------------------------------------------
@@ -120,9 +123,12 @@ class BehaviouralPlanner:
             # the deceleration state.
             # TODO: INSERT YOUR CODE BETWEEN THE DASHED LINES
             # ------------------------------------------------------------------
-            if stop_sign_found:
-                self._goal_state[2] = 0.0
-                self._state = DECELERATE_TO_STOP
+            if self._continue_count > 60:
+                if stop_sign_found:
+                    self._goal_state[2] = 0.0
+                    self._state = DECELERATE_TO_STOP
+
+            self._continue_count += 1
             # ------------------------------------------------------------------
 
         # In this state, check if we have reached a complete stop. Use the
@@ -168,6 +174,7 @@ class BehaviouralPlanner:
                 # --------------------------------------------------------------
                 if not stop_sign_found:
                     self._stop_count = 0
+                    self._continue_count = 0
                     self._state = FOLLOW_LANE
                 # --------------------------------------------------------------
 
